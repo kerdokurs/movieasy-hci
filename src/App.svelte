@@ -1,56 +1,52 @@
 <script lang="typescript">
-  import { onMount } from 'svelte';
+  import Analyze from './Analyze.svelte';
+  import Find from './Find.svelte';
+  import Finish from './Finish.svelte';
+  import FriendRequests from './FriendRequests.svelte';
+  import Group from './GroupV.svelte';
+  import Home from './Home.svelte';
+  import Invite from './Invite.svelte';
+  import MovieInfo from './MovieInfo.svelte';
+  import MovieSuggestion from './MovieSuggestion.svelte';
+  import NotYetImpl from './NotYetImpl.svelte';
 
-  let count: number = 0;
-  onMount(() => {
-    const interval = setInterval(() => count++, 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  });
+  import Onboarding from './Onboarding.svelte';
+  import Questions from './Questions.svelte';
+  import Review from './Review.svelte';
+
+  import stage, { Stage } from './stage';
 </script>
 
-<div class="App">
-  <header>
-    <img src="/logo.svg" class="App-logo" alt="logo" />
-    <p>Edit <code>src/App.svelte</code> and save to reload.</p>
-    <p>Page has been open for <code>{count}</code> seconds.</p>
-    <p>
-      <a
-        class="App-link"
-        href="https://svelte.dev"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn Svelte
-      </a>
-    </p>
-  </header>
-</div>
+{#if $stage == Stage.ONBOARDING}
+  <Onboarding />
+{:else if $stage == Stage.QUESTIONS}
+  <Questions />
+{:else if $stage == Stage.HOME}
+  <Home />
+{:else if $stage == Stage.FIND}
+  <Find />
+{:else if $stage == Stage.CREATE_GROUP}
+  <Invite />
+{:else if $stage == Stage.GROUP}
+  <Group />
+{:else if $stage == Stage.ANALYZE}
+  <Analyze />
+{:else if $stage == Stage.MOVIE_SUGGESTION}
+  <MovieSuggestion />
+{:else if $stage == Stage.MOVIE_INFO}
+  <MovieInfo />
+{:else if $stage == Stage.REVIEW}
+  <Review />
+{:else if $stage == Stage.FINISH}
+  <Finish />
+{:else if $stage == Stage.FRIEND_REQUESTS}
+  <FriendRequests />
+{:else if $stage == Stage.NOT_IMPL}
+  <NotYetImpl />
+{/if}
 
-<style type="text/postcss">
+<style>
   :global(body) {
-    @apply m-0;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  .App {
-    @apply text-center text-xl;
-  }
-  .App code {
-    @apply bg-red-200 px-1 py-2 rounded font-bold;
-  }
-  .App p {
-    @apply m-2;
-  }
-
-  .App header {
-    @apply bg-white text-black flex flex-col items-center justify-center min-h-screen;
-  }
-  .App-link {
-    @apply text-red-600;
-  }
-  .App-logo {
-    height: 36vmin;
-    @apply animate-pulse mb-12 pointer-events-none;
+    font-family: 'Montserrat', sans-serif;
   }
 </style>
